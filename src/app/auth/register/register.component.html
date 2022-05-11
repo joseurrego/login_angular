@@ -1,0 +1,22 @@
+<div class="login">
+	<h1>Register</h1>
+    <form (ngSubmit) = "registro(formRegister)" #formRegister="ngForm">
+    	<input type="text" ngModel name="name" placeholder="Username" required="required" />
+        <input type="email" ngModel  name="email" placeholder="Email" required="required" />
+        <input type="password" ngModel name="password" placeholder="Password" required="required" />
+
+        <input type="password" ngModel name="password2" placeholder="Confirm Password" required="required" />
+        <div class="d-flex" style="color: #ffffff; gap: 25px;">
+            <input type="checkbox"
+                [ngModel] = "register.terminos"
+                value="true"
+                name="terminos"
+                id="terminos"
+                style="width: 15px; height: 20px;"
+                
+            >
+            <label for="terminos">Terminos y Condiciones</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-large" [disabled]="formRegister.invalid">Register</button>
+    </form>
+</div>
