@@ -1,15 +1,16 @@
 <div class="login">
 	<h1>Register</h1>
     <form (ngSubmit) = "registro()" [formGroup] = "formRegister">
-    	<input type="text" name="name" placeholder="Username" required="required" />
-        <input type="email"  name="email" placeholder="Email" required="required" />
-        <input type="password" name="password" placeholder="Password" required="required" />
+    	<input type="text" name="name" formControlName="name" placeholder="Username" required="required" />
+        <input type="email"  name="email" formControlName="email" placeholder="Email" required="required" />
+        <input type="password" name="password" formControlName="password" placeholder="Password" required="required" />
 
-        <input type="password" name="password2" placeholder="Confirm Password" required="required" />
+        <input type="password" name="password2" formControlName="password2" placeholder="Confirm Password" required="required" />
         <div class="d-flex" style="color: #ffffff; gap: 25px;">
             <input type="checkbox"
                 value="true"
                 name="terminos"
+                formControlName="terminos"
                 id="terminos"
                 style="width: 15px; height: 20px;"
                 

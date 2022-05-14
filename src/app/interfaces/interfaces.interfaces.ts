@@ -12,3 +12,15 @@ export interface FormRegistro {
     email : string,
     password : string,
 }
+
+export interface RenovarToken {
+    id: string,
+    nombre: string,
+    ok: boolean,
+    token: string
+}
+
+export interface User {
+    id: string,
+    nombre: string,
+}

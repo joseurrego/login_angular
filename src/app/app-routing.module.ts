@@ -8,7 +8,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: MainComponent,
-    pathMatch: 'full',
     canActivate: [AuthGuardGuard],
     canLoad: [AuthGuardGuard]
   },

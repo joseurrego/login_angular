@@ -1,5 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder ,FormGroup, Validators } from '@angular/forms';
+
+
+import Swal from 'sweetalert2';
+
+
 import { AuthService } from 'src/app/services/auth.service';
 import { FormRegistro } from '../../interfaces/interfaces.interfaces';
 
@@ -15,12 +21,12 @@ export class RegisterComponent implements OnInit {
     name: ['',Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['',Validators.required],
-    pasword2: ['',Validators.required],
-    termino: [true, Validators.required]
+    password2: ['',Validators.required],
+    terminos: [true, Validators.required]
   });
 
 
-  constructor( private authService: AuthService, private fb: FormBuilder ) {
+  constructor( private authService: AuthService, private fb: FormBuilder, private router: Router ) {
     
    }
 
@@ -28,7 +34,6 @@ export class RegisterComponent implements OnInit {
   }
 
   registro() {
-    console.log(this.formRegister.value);
     if (this.formRegister.get('password')?.value != this.formRegister.get('password2')?.value) {
       console.log('error de password');      
       return;
@@ -41,38 +46,18 @@ export class RegisterComponent implements OnInit {
     }
 
     this.authService.registrar(data).subscribe(resp => {
+      console.log(resp);
       localStorage.setItem('token', resp.token)
-      
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `Usuario ${resp.nombre} Registrado Correctamente`,
+        showConfirmButton: false,
+        timer: 2000,
+      })
     });
-    // this.authService.registrar(data).subscribe(console.log)
-    // // console.log('enviando formulario', formRegister.value)
-    // // console.log(formRegister.controls?.['name'].value);
-    // // console.log(formRegister.controls?.['email'].value);
-    // const nombre = formRegister.controls?.['name'].value;
-    // const email = formRegister.controls?.['email'].value;
-    // // console.log(formRegister.controls);
-    // const password = formRegister.controls?.['password'].value;
-    // const password2 = formRegister.controls?.['password2'].value
-    // if(password == password2 ){
-    //   const data = {
-    //     nombre: nombre,
-    //     email: email,
-    //     password: password
-    //   }
-    //   this.authService.registrar(data).subscribe(console.log)
-    //   console.log('formulario valido')
-      
-    // }else {
-    //   console.log('formulario invalido')
-    // }
-
-    // formRegister.reset ({
-    //   name:'',
-    //   email: '',
-    //   password: '',
-    //   password2: '',
-    //   terminos: false,
-    // })
+    this.router.navigateByUrl('home');
+    
   }
 
 }
